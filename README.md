@@ -1,5 +1,9 @@
 # Vue Numeric Input Stepper
 
+[![CI](https://github.com/zhizit/vue-numeric-input-stepper/actions/workflows/ci.yml/badge.svg)](https://github.com/zhizit/vue-numeric-input-stepper/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/vue-numeric-input-stepper.svg)](https://www.npmjs.com/package/vue-numeric-input-stepper)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A flexible and accessible numeric input stepper component for Vue 3 with long-press support and debounced saving.
 
 ## Features
