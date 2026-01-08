@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Styles Demo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+      background-color: #f5f5f5;
+    }
+    .demo-section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+
+    /* カスタムスタイル例1: 大きなボタンと入力欄 */
+    .large-stepper {
+      --stepper-button-width: 48px;
+      --stepper-button-height: 48px;
+      --stepper-input-width: 80px;
+      --stepper-input-height: 36px;
+      --stepper-input-font-size: 18px;
+      --stepper-gap: 16px;
+    }
+
+    /* カスタムスタイル例2: カラフルなボタン */
+    .colorful-stepper {
+      --stepper-button-bg: #007bff;
+      --stepper-button-color: white;
+      --stepper-button-hover-bg: #0056b3;
+      --stepper-button-active-bg: #004085;
+      --stepper-button-radius: 8px;
+      --stepper-input-border: 2px solid #007bff;
+      --stepper-input-focus-border-color: #0056b3;
+    }
+
+    /* カスタムスタイル例3: ミニマルデザイン */
+    .minimal-stepper {
+      --stepper-button-border: none;
+      --stepper-button-bg: #f0f0f0;
+      --stepper-button-hover-bg: #e0e0e0;
+      --stepper-input-border: none;
+      --stepper-input-bg: #f9f9f9;
+      --stepper-gap: 4px;
+    }
+
+    /* カスタムスタイル例4: ダークテーマ */
+    .dark-stepper {
+      --stepper-button-bg: #333;
+      --stepper-button-color: white;
+      --stepper-button-hover-bg: #555;
+      --stepper-button-border: 1px solid #555;
+      --stepper-input-bg: #222;
+      --stepper-input-color: white;
+      --stepper-input-border: 1px solid #555;
+      --stepper-input-focus-border-color: #007bff;
+      --stepper-unit-color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>Custom Styles Demo</h1>
+
+  <div id="app">
+    <div class="demo-section">
+      <h2>デフォルトスタイル</h2>
+      <numeric-input-stepper v-model="value1" :min="1" :max="100" unit="pt" />
+      <p>値: {{ value1 }}</p>
+    </div>
+
+    <div class="demo-section">
+      <h2>大きなサイズ</h2>
+      <numeric-input-stepper
+        v-model="value2"
+        :min="1"
+        :max="100"
+        unit="px"
+        class="large-stepper"
+      />
+      <p>値: {{ value2 }}</p>
+    </div>
+
+    <div class="demo-section">
+      <h2>カラフルなボタン</h2>
+      <numeric-input-stepper
+        v-model="value3"
+        :min="1"
+        :max="100"
+        unit="pt"
+        class="colorful-stepper"
+      />
+      <p>値: {{ value3 }}</p>
+    </div>
+
+    <div class="demo-section">
+      <h2>ミニマルデザイン</h2>
+      <numeric-input-stepper
+        v-model="value4"
+        :min="1"
+        :max="100"
+        unit="px"
+        class="minimal-stepper"
+      />
+      <p>値: {{ value4 }}</p>
+    </div>
+
+    <div class="demo-section" style="background: #1a1a1a; color: white;">
+      <h2>ダークテーマ</h2>
+      <numeric-input-stepper
+        v-model="value5"
+        :min="1"
+        :max="100"
+        unit="pt"
+        class="dark-stepper"
+      />
+      <p>値: {{ value5 }}</p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createApp, ref } from 'vue';
+    import NumericInputStepper from '../src/NumericInputStepper.vue';
+
+    const app = createApp({
+      components: {
+        NumericInputStepper,
+      },
+      setup() {
+        return {
+          value1: ref(14),
+          value2: ref(20),
+          value3: ref(30),
+          value4: ref(40),
+          value5: ref(50),
+        };
+      },
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,77 @@
+{
+  "name": "vue-numeric-input-stepper",
+  "version": "1.0.0",
+  "description": "A flexible and accessible numeric input stepper component for Vue 3 with long-press support and debounced saving",
+  "keywords": [
+    "vue",
+    "vue3",
+    "input",
+    "stepper",
+    "numeric",
+    "component",
+    "typescript",
+    "accessibility"
+  ],
+  "type": "module",
+  "main": "./dist/vue-numeric-input-stepper.cjs.js",
+  "module": "./dist/vue-numeric-input-stepper.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/vue-numeric-input-stepper.esm.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/vue-numeric-input-stepper.cjs.js"
+      }
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "type-check": "vue-tsc --noEmit",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-interactions": "^8.0.0",
+    "@storybook/addon-links": "^8.0.0",
+    "@storybook/blocks": "^8.0.0",
+    "@storybook/test": "^8.0.0",
+    "@storybook/vue3": "^8.0.0",
+    "@storybook/vue3-vite": "^8.0.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.5.1",
+    "jsdom": "^24.0.0",
+    "storybook": "^8.0.0",
+    "typescript": "^5.4.2",
+    "vite": "^5.4.0",
+    "vite-plugin-dts": "^4.0.0",
+    "vitest": "^2.0.0",
+    "vue": "^3.5.0",
+    "vue-tsc": "^2.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/vue-numeric-input-stepper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/vue-numeric-input-stepper/issues"
+  },
+  "homepage": "https://github.com/your-username/vue-numeric-input-stepper#readme"
+}
+

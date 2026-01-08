@@ -1,0 +1,14 @@
+node_modules
+tests
+*.spec.ts
+*.test.ts
+.vscode
+.idea
+*.log
+.DS_Store
+coverage
+.nyc_output
+*.tsbuildinfo
+src/**/*.spec.ts
+src/**/*.test.ts
+

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Numeric Input Stepper - Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .demo-section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .demo-section h2 {
+      margin-top: 0;
+      color: #555;
+      font-size: 1.2em;
+    }
+    .demo-item {
+      margin: 20px 0;
+    }
+    .demo-item label {
+      display: block;
+      margin-bottom: 8px;
+      color: #666;
+      font-size: 0.9em;
+    }
+    .value-display {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .event-log {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 0.85em;
+    }
+    .event-log-item {
+      padding: 4px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .event-log-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vue Numeric Input Stepper - Demo</h1>
+
+  <div id="app">
+    <div class="demo-section">
+      <h2>基本的な使用例</h2>
+      <div class="demo-item">
+        <label>値: {{ value1 }}</label>
+        <numeric-input-stepper
+          v-model="value1"
+          :min="1"
+          :max="100"
+          unit="pt"
+          @save="onSave1"
+          @change="onChange1"
+        />
+        <div class="value-display">現在の値: {{ value1 }}</div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>カスタムステップ</h2>
+      <div class="demo-item">
+        <label>値: {{ value2 }} (ステップ: 10)</label>
+        <numeric-input-stepper
+          v-model="value2"
+          :min="0"
+          :max="1000"
+          :step="10"
+          unit="px"
+          @save="onSave2"
+        />
+        <div class="value-display">現在の値: {{ value2 }}px</div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>イベントログ</h2>
+      <div class="demo-item">
+        <label>値: {{ value3 }}</label>
+        <numeric-input-stepper
+          v-model="value3"
+          :min="1"
+          :max="50"
+          @save="onSave3"
+          @change="onChange3"
+        />
+        <div class="event-log">
+          <div v-for="(log, index) in eventLogs" :key="index" class="event-log-item">
+            {{ log }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>無効化状態</h2>
+      <div class="demo-item">
+        <label>値: {{ value4 }} (disabled)</label>
+        <numeric-input-stepper
+          v-model="value4"
+          :min="1"
+          :max="100"
+          :disabled="true"
+        />
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+    import { NumericInputStepper } from './src/index.ts';
+
+    const app = createApp({
+      components: {
+        NumericInputStepper,
+      },
+      setup() {
+        const value1 = ref(14);
+        const value2 = ref(100);
+        const value3 = ref(10);
+        const value4 = ref(50);
+        const eventLogs = ref([]);
+
+        const onSave1 = (val) => {
+          console.log('Save 1:', val);
+        };
+
+        const onChange1 = (event) => {
+          console.log('Change 1:', event);
+        };
+
+        const onSave2 = (val) => {
+          console.log('Save 2:', val);
+        };
+
+        const onSave3 = (val) => {
+          const time = new Date().toLocaleTimeString();
+          eventLogs.value.unshift(`[${time}] Save: ${val}`);
+          if (eventLogs.value.length > 10) {
+            eventLogs.value.pop();
+          }
+        };
+
+        const onChange3 = (event) => {
+          const time = new Date().toLocaleTimeString();
+          eventLogs.value.unshift(`[${time}] Change: ${event.oldValue} → ${event.newValue}`);
+          if (eventLogs.value.length > 10) {
+            eventLogs.value.pop();
+          }
+        };
+
+        return {
+          value1,
+          value2,
+          value3,
+          value4,
+          eventLogs,
+          onSave1,
+          onChange1,
+          onSave2,
+          onSave3,
+          onChange3,
+        };
+      },
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>
+

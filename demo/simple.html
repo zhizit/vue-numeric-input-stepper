@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Test</title>
+  <style>
+    body {
+      padding: 40px;
+      font-family: sans-serif;
+    }
+    .test-box {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple Test</h1>
+  <div id="app">
+    <div class="test-box">
+      <p>Value: {{ value }}</p>
+      <numeric-input-stepper v-model="value" :min="1" :max="100" />
+    </div>
+  </div>
+
+  <script type="module">
+    import { createApp, ref } from 'vue';
+    import NumericInputStepper from '../src/NumericInputStepper.vue';
+
+    console.log('Import successful');
+    console.log('NumericInputStepper:', NumericInputStepper);
+
+    const app = createApp({
+      components: {
+        NumericInputStepper,
+      },
+      setup() {
+        const value = ref(10);
+        console.log('Setup called, value:', value.value);
+        return { value };
+      },
+    });
+
+    console.log('App created, mounting...');
+    app.mount('#app');
+    console.log('App mounted');
+  </script>
+</body>
+</html>
+
