@@ -6,6 +6,17 @@
 
 A flexible and accessible numeric input stepper component for Vue 3 with long-press support and debounced saving.
 
+## Screenshot
+
+![Vue Numeric Input Stepper](https://github.com/zhizit/vue-numeric-input-stepper/blob/main/assets/images/screenshot.png?raw=true)
+
+## Demo
+
+<video src="https://github.com/zhizit/vue-numeric-input-stepper/blob/main/assets/images/demo.mp4?raw=true" controls width="800" style="max-width: 100%; height: auto;">
+  Your browser does not support the video tag. 
+  [Download demo video](https://github.com/zhizit/vue-numeric-input-stepper/blob/main/assets/images/demo.mp4?raw=true) instead.
+</video>
+
 ## Features
 
 - ✅ **Long-press support** - Hold buttons to continuously increment/decrement
