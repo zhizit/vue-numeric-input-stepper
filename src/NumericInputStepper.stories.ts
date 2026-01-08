@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import { ref, watch } from 'vue';
+import { ref, watch, reactive } from 'vue';
 import NumericInputStepper from './NumericInputStepper.vue';
 import { textSizeConverter } from './utils/ValueConverter';
 
@@ -58,27 +58,34 @@ export const Default: Story = {
   render: (args) => ({
     components: { NumericInputStepper },
     setup() {
-      const value = ref(args.modelValue);
+      const reactiveArgs = reactive(args as any);
+      const value = ref(reactiveArgs.modelValue ?? 50);
       // argsが変更されたときにvalueを更新
-      watch(() => args.modelValue, (newVal) => {
-        value.value = newVal;
+      watch(() => reactiveArgs.modelValue, (newVal) => {
+        if (newVal !== undefined) {
+          value.value = newVal;
+        }
       });
-      watch(() => args.min, () => {
+      watch(() => reactiveArgs.min, () => {
         // minが変更されたら、valueを範囲内に調整
-        const clamped = Math.max(args.min || 1, Math.min(args.max || 100, value.value));
+        const min = reactiveArgs.min ?? 1;
+        const max = reactiveArgs.max ?? 100;
+        const clamped = Math.max(min, Math.min(max, value.value));
         if (clamped !== value.value) {
           value.value = clamped;
         }
       });
-      watch(() => args.max, () => {
+      watch(() => reactiveArgs.max, () => {
         // maxが変更されたら、valueを範囲内に調整
-        const clamped = Math.max(args.min || 1, Math.min(args.max || 100, value.value));
+        const min = reactiveArgs.min ?? 1;
+        const max = reactiveArgs.max ?? 100;
+        const clamped = Math.max(min, Math.min(max, value.value));
         if (clamped !== value.value) {
           value.value = clamped;
         }
       });
       return {
-        args,
+        args: reactiveArgs,
         value,
       };
     },
@@ -340,7 +347,7 @@ export const ValueConversion: Story = {
   render: () => ({
     components: { NumericInputStepper },
     setup() {
-      const { toInternal, toDisplay } = textSizeConverter;
+      const { toInternal } = textSizeConverter;
       
       const displayValue = ref(14);
       const internalValue = ref(toInternal(14));
